@@ -3,9 +3,9 @@ package org.dongdong.board.todo.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
-// 테이블 용도
-// @Table 생략시에는 클래스 이름이 테이블 이름
+@DynamicUpdate
 @Entity
 @Table(name = "tbl_todo")
 @Builder
@@ -26,10 +26,16 @@ public class Todo extends BaseEntity{
     @Column(nullable = false)
     private String writer;
 
-    // JPA는 가능하면 엔티티 객체를 readonly로 하는 것을 권장
-    // 변경하고 싶을 때 setxxx가 아니라 별도의 메서드를 이용
+    @Column(nullable = false, length = 1000)
+    private String content;
 
-    public void changeTitle(String title) {
+    private Todo(String title, String writer, String content) {
         this.title = title;
+        this.writer = writer;
+        this.content = content;
+    }
+
+    public static Todo of(String title, String writer, String content) {
+        return new Todo(title, writer, content);
     }
 }

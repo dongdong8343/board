@@ -2,14 +2,9 @@ package org.dongdong.board.todo.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.dongdong.board.todo.dto.PageRequest;
-import org.dongdong.board.todo.dto.PageResponse;
-import org.dongdong.board.todo.dto.TodoList;
+import org.dongdong.board.todo.dto.*;
 import org.dongdong.board.todo.service.TodoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -19,7 +14,19 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/list")
-    public PageResponse<TodoList> readTodoList(@RequestBody PageRequest request) {
+    public PageResponse<TodoList> readTodoList(@ModelAttribute PageRequest request) {
+        log.info(request.getPage());
+        log.info(request.getSize());
         return todoService.readTodoList(request);
+    }
+
+    @PostMapping("/new")
+    public Long saveTodo(@RequestBody AddTodo request) {
+        return todoService.saveTodo(request);
+    }
+
+    @PatchMapping("/{tno}")
+    public Long updateTodo(@PathVariable Long tno, @RequestBody UpdateTodo updateTodo) {
+        return todoService.updateTodo(tno, updateTodo);
     }
 }
