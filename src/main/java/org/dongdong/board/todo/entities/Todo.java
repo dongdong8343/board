@@ -38,4 +38,10 @@ public class Todo extends BaseEntity{
     public static Todo of(String title, String writer, String content) {
         return new Todo(title, writer, content);
     }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
+

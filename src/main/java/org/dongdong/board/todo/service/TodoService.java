@@ -24,4 +24,13 @@ public class TodoService {
 
         return todoRepository.save(todo).getTno();
     }
+
+    @Transactional
+    public Long updateTodo(Long tno, UpdateTodo request) {
+        Todo todo = todoRepository.findByTno(tno);
+
+        todo.update(request.getTitle(), request.getContent());
+
+        return tno;
+    }
 }
