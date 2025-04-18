@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.dongdong.board.todo.dto.*;
 import org.dongdong.board.todo.service.TodoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Log4j2
@@ -28,5 +29,12 @@ public class TodoController {
     @PatchMapping("/{tno}")
     public Long updateTodo(@PathVariable Long tno, @RequestBody UpdateTodo updateTodo) {
         return todoService.updateTodo(tno, updateTodo);
+    }
+
+    @DeleteMapping("/{tno}")
+    public ResponseEntity<String> deleteTodo(@PathVariable Long tno) {
+        todoService.deleteTodo(tno);
+
+        return ResponseEntity.ok(tno + "번 게시글이 삭제됐습니다.");
     }
 }

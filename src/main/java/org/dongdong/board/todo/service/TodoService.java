@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.dongdong.board.todo.dto.*;
 import org.dongdong.board.todo.entities.Todo;
 import org.dongdong.board.todo.repository.TodoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,5 +33,12 @@ public class TodoService {
         todo.update(request.getTitle(), request.getContent());
 
         return tno;
+    }
+
+    @Transactional
+    public void deleteTodo(Long tno) {
+        Todo todo = todoRepository.findByTno(tno);
+
+        todo.delete();
     }
 }

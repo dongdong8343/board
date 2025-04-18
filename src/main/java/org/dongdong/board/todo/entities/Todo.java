@@ -29,6 +29,9 @@ public class Todo extends BaseEntity{
     @Column(nullable = false, length = 1000)
     private String content;
 
+    @Column(nullable = false)
+    private Boolean isDeleted = false;
+
     private Todo(String title, String writer, String content) {
         this.title = title;
         this.writer = writer;
@@ -42,6 +45,10 @@ public class Todo extends BaseEntity{
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public void delete() {
+        this.isDeleted = true;
     }
 }
 
