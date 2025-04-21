@@ -28,14 +28,21 @@ public class Todo extends BaseEntity{
     @Column(nullable = false)
     private String writer;
 
-// JPA는 가능하면 엔티티 객체를 readonly로 하는 것을 권장
-// 변경하고 싶을 때 setxxx가 아니라 별도의 메서드를 이용
-
-    public void changeTitle(String title) {
+    private Todo(String title, String content, String writer) {
         this.title = title;
+        this.content = content;
+        this.writer = writer;
     }
 
-    public void changeContent(String content) {
+    // 정적 팩토리 메서드
+    public static Todo createTodo(String title, String content, String writer) {
+        return new Todo(title, content, writer);
+    }
+
+
+    public void update(String title, String content, String writer) {
+        this.title = title;
         this.content = content;
+        this.writer = writer;
     }
 }
