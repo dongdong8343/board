@@ -60,6 +60,7 @@ public class TodoRepositoryTests {
         log.info(count);
     }
 
+
     @Test
     public void testInsert() {
         for (int i = 0; i < 10000; i++) {
