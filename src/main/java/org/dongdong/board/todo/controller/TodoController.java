@@ -33,6 +33,8 @@ public class TodoController {
 
     @PatchMapping("/{tno}")
     public Long updateTodo(@PathVariable Long tno, @RequestBody UpdateTodo updateTodo) {
+        log.info("수정 요청 ------------------------");
+        log.info(updateTodo.getEditedContent() + " " + updateTodo.getEditedTitle());
         return todoService.updateTodo(tno, updateTodo);
     }
 

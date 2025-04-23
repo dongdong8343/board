@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UpdateTodo {
-    private String title;
-    private String content;
+    private String editedTitle;
+    private String editedContent;
 }

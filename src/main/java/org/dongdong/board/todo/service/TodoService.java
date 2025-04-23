@@ -33,7 +33,7 @@ public class TodoService {
     public Long updateTodo(Long tno, UpdateTodo request) {
         Todo todo = todoRepository.findByTno(tno);
 
-        todo.update(request.getTitle(), request.getContent());
+        todo.update(request.getEditedTitle(), request.getEditedContent());
 
         return tno;
     }
