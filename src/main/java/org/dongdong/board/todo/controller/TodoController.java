@@ -21,6 +21,11 @@ public class TodoController {
         return todoService.readTodoList(request);
     }
 
+    @GetMapping("{tno}")
+    public ReadTodo.Response getTodo(@PathVariable Long tno) {
+        return todoService.getTodoByTno(tno);
+    }
+
     @PostMapping("/new")
     public Long saveTodo(@RequestBody AddTodo request) {
         return todoService.saveTodo(request);
