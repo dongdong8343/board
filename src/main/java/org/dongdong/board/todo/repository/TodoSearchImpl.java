@@ -31,6 +31,7 @@ public class TodoSearchImpl implements TodoSearch {
         query.limit(pageRequest.getSize());
         query.offset(pageRequest.getOffset());
         query.orderBy(new OrderSpecifier<>(Order.DESC, todo.tno));
+        query.where(todo.isDeleted.eq(false));
 
         JPQLQuery<TodoList> dtoQuery = query.select(
                 Projections.bean(TodoList.class,
